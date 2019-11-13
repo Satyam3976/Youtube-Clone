@@ -9,15 +9,10 @@ const app=express();
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
-//const formRoutes = require('./routes/form');
-
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-//app.use(formRoutes);
 app.get('/',(req, res) =>{
-    
-    const db=require('./util/database');
 
 var x=new Date();
 var curDay=x.getDate();//current date
@@ -45,12 +40,10 @@ db.query('SELECT * from data',(error,results)=>
 {
     var i=0;
     results.forEach((r)=>{
-        sum=0;
-
-  //console.log(r);
+    sum=0;
+        
 if(error)
-console.log(error);
-
+      console.log(error);
 else
 {
       d=r.day;//day the dummy views last updated
@@ -74,7 +67,7 @@ function countLeapYears(d,m,y)
 var n1 = y*365 + d; 
   
     for (var i=0; i<m - 1; i++) 
-        n1 =n1+ monthDays[i]; 
+     n1 =n1+ monthDays[i]; 
       
      n1 =n1+ countLeapYears(d,m,y); 
   
@@ -90,8 +83,6 @@ var n1 = y*365 + d;
     var MinBefore=1440-h*60-mn;
 	console.log(Math.ceil((MinBefore*valueX*valueY)/(24*60)));
     sum=sum+Math.ceil((MinBefore*valueX*valueY)/(24*60));
-	console.log(sum);
-   
    
     //to find the number of minutes on that particular day
     
@@ -110,15 +101,12 @@ var n1 = y*365 + d;
     sum=sum+Math.ceil((i*valueX*y));
    
     }  
-   // console.log(sum);
 }
 else
 { 
     var diff=curHr*60+curMm-h*60-mn;
-	console.log(diff);
     sum=sum+Math.ceil(diff*valueX*valueY);
     newy=valueY;
-   console.log("ok",sum);
 }
    
 }
@@ -134,8 +122,7 @@ else
 
 console.log("connected");
 });
-//console.log(i);
-console.log("id",r.id);
+
 db.query('UPDATE data SET dummyView=dummyView+? where id=?',[sum,r.id],(error,results)=>
 {
 if(error)
@@ -154,21 +141,16 @@ db.query('SELECT actualView,dummyView from data' ,(error,results)=>{
 		console.log(error);
 	else
 		var a=[];
-	results.forEach((r)=>{
+	    results.forEach((r)=>{
 		a.push(r.actualView+r.dummyView);
-		
-
 	});
-	console.log(a);
 	res.render('form',{a});
 });
 
 });
-app.get('/p/:id',function(req,res)
+app.get('/upload/:id',function(req,res)
 {
     id=req.params.id;
-    // console.log(id);
-    // console.log(typeof(id));
     db.query("UPDATE data SET actualView=actualView+1 WHERE id=?",[id]);
 });
 app.listen(3000);
