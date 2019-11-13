@@ -1,0 +1,28 @@
+{
+  "name": "dummy-users",
+  "version": "1.0.0",
+  "description": "a project to create dummy views",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/satyam3976/Youtube-Clone.git"
+  },
+  "author": "satyam chaudhary",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/satyam3976/Youtube-Clone/issues"
+  },
+  "homepage": "https://github.com/satyam3976/Youtube-Clone#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "ejs": "^2.7.1",
+    "express": "^4.17.1",
+    "mysql2": "^2.0.0",
+    "nodemon": "^1.19.4",
+    "sequelize": "^5.21.1"
+  }
+}
